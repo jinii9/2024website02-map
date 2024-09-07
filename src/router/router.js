@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import UserView from "../views/UserView.vue";
+import FriendView from "../views/FriendView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/user",
       name: "user",
       component: UserView,
+    },
+    {
+      path: "/friend",
+      name: "friend",
+      component: FriendView,
     },
   ],
 });
