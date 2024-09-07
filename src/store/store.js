@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-
 export default createStore({
   state: {
     userData: [
@@ -12,7 +11,7 @@ export default createStore({
           latitude: 37.55885781747545,
           longitude: 127.1659341,
         },
-        image: "https://picsum.photos/100",
+        image: "/public/img-avatars/1.png",
       },
       {
         userid: "ttomi",
@@ -23,7 +22,7 @@ export default createStore({
           latitude: 37.559685423905066,
           longitude: 127.13475180054544,
         },
-        image: "https://picsum.photos/100",
+        image: "/public/img-avatars/10.png",
       },
       {
         userid: "test",
@@ -34,7 +33,7 @@ export default createStore({
           latitude: 37.553440243421605,
           longitude: 127.15761225828356,
         },
-        image: "https://picsum.photos/100",
+        image: "/public/img-avatars/11.png",
       },
     ],
   },
