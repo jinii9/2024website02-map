@@ -1,12 +1,15 @@
 <template>
   <!-- <div>{{ location.latitude }} / {{ location.longitude }}</div> -->
-  <div id="map" style="width: 100%; height: 100%"></div>
+  <div id="map" class="position-relative" style="width: 100%; height: 100%">
+    <MenuView />
+  </div>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useMyLocation } from "../../utils/useMyLocation";
 import store from "../../store/store";
+import MenuView from "./MenuView.vue";
 
 const location = useMyLocation();
 
@@ -154,7 +157,6 @@ watch(
 }
 
 .imgWrap {
-  //   background: red;
   position: relative;
   display: inline-flex;
   align-content: center;

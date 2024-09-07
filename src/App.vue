@@ -5,7 +5,7 @@
 
 <script setup>
 import NavbarView from "./components/NavbarView.vue";
-</script>z
+</script>
 
 <style lang="scss" scoped></style>
 zz
