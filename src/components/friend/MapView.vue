@@ -28,6 +28,9 @@ const createMap = () => {
       user.location.longitude
     ),
     image: user.image,
+    intro: user.intro,
+    userId: user.userid,
+    userName: user.username,
   }));
 
   positions.forEach((position) => {
@@ -72,18 +75,17 @@ const createMap = () => {
     // card-title h5 생성
     const cardTitle = document.createElement("h5");
     cardTitle.className = "card-title";
-    cardTitle.textContent = "윤서진";
+    cardTitle.textContent = position.userName;
 
     // card-subtitle h6 생성
     const cardSubtitle = document.createElement("h6");
     cardSubtitle.className = "card-subtitle mb-2 text-body-secondary";
-    cardSubtitle.textContent = "Seojin9";
+    cardSubtitle.textContent = position.userId;
 
     // card-text p 생성
     const cardText = document.createElement("p");
     cardText.className = "card-text lh-sm";
-    cardText.textContent =
-      "안녕? 나는 윤서진이야 ㅎㅎ 이 근처에 온다면 연락해줘^^";
+    cardText.textContent = position.intro;
 
     content.appendChild(card);
     card.appendChild(cardBody);
@@ -101,8 +103,6 @@ const createMap = () => {
       clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
     });
 
-    customOverlay.setMap(map); // 첫 번째 오버레이 클릭 시 두 번째 오버레이를 표시합니다
-
     /** 토글 생성 */
     var customOverlay2 = new kakao.maps.CustomOverlay({
       map: map,
@@ -111,9 +111,12 @@ const createMap = () => {
       yAnchor: 1,
     });
 
+    customOverlay.setMap(map);
+    customOverlay2.setMap(map);
+
     /** card 이벤트 */
     content.addEventListener("mouseenter", () => {
-      customOverlay2.setMap(map); // 첫 번째 오버레이 클릭 시 두 번째 오버레이를 표시합니다
+      customOverlay2.setMap(map);
       //   card.style.display = "inline-block";
       card.style.visibility = "visible";
     });
