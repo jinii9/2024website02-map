@@ -1,21 +1,13 @@
 <template>
-  <div>회원가입 지도 {{ moveLat }} / {{ moveLng }}</div>
+  <div>집 주소 {{ location.latitude }} / {{ location.longitude }}</div>
   <div id="map" style="width: 500px; height: 400px"></div>
-
-  {{ latitude }}{{ longitude }}
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive } from "vue";
 
-const latitude = ref(0);
-const longitude = ref(0);
-
-const moveLat = ref(0);
-const moveLng = ref(0);
-
-// 부모한테 전달할 location 값
-const location = ref({
+// 부모한테 전달할 location 값을 reactive로 변경
+const location = reactive({
   latitude: 0,
   longitude: 0,
 });
@@ -30,18 +22,14 @@ onMounted(() => {
     (pos) => {
       console.log(pos.coords.latitude, pos.coords.longitude);
 
-      latitude.value = pos.coords.latitude;
-      longitude.value = pos.coords.longitude;
-
-      console.log("dddd", latitude.value, longitude.value);
+      location.latitude = pos.coords.latitude;
+      location.longitude = pos.coords.longitude;
 
       //   initMap();
-
       if (window.kakao && window.kakao.maps) {
         initMap();
       } else {
         const script = document.createElement("script");
-        /* global kakao */
         script.onload = () => kakao.maps.load(initMap);
         script.src =
           "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=46a397710eafda98fface8d44f6f4e14";
@@ -57,23 +45,23 @@ onMounted(() => {
 
 const initMap = () => {
   const container = document.getElementById("map");
-  let options = {
-    center: new kakao.maps.LatLng(latitude.value, longitude.value),
+  const options = {
+    center: new kakao.maps.LatLng(location.latitude, location.longitude),
     level: 3,
   };
 
-  let map = new kakao.maps.Map(container, options);
+  const map = new kakao.maps.Map(container, options);
 
-  var markerPosition = new kakao.maps.LatLng(latitude.value, longitude.value);
+  const markerPosition = new kakao.maps.LatLng(
+    location.latitude,
+    location.longitude
+  );
 
-  // location에도 추가
-  location.value.latitude = latitude.value;
-  location.value.longitude = longitude.value;
   // 부모에게 location 전달
-  emitLocation("handleLocation", location.value);
+  emitLocation("handleLocation", location);
 
   // 마커를 생성합니다
-  var marker = new kakao.maps.Marker({
+  const marker = new kakao.maps.Marker({
     position: markerPosition,
   });
 
@@ -81,19 +69,18 @@ const initMap = () => {
   marker.setMap(map);
 
   // 지도에 클릭 이벤트를 등록합니다
-  // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-    // 클릭한 위도, 경도 정보를 가져옵니다
-    var latlng = mouseEvent.latLng;
+    const latlng = mouseEvent.latLng;
 
     // 마커 위치를 클릭한 위치로 옮깁니다
     marker.setPosition(latlng);
 
-    // location에도 추가
-    location.value.latitude = latlng.getLat();
-    location.value.longitude = latlng.getLng();
+    // location 값 업데이트
+    location.latitude = latlng.getLat();
+    location.longitude = latlng.getLng();
+
     // 부모에게 location 전달
-    emitLocation("handleLocation", location.value);
+    emitLocation("handleLocation", location);
   });
 };
 </script>

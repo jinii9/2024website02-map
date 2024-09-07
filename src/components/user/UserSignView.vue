@@ -49,7 +49,8 @@
     <div class="btn btn-primary" @click="addUser">회원가입</div>
   </div>
 
-  {{ userdata }}
+  <!-- {{ userdata }} -->
+  <!-- {{ $store.state.userData[$store.state.userData.length - 1] }} -->
 </template>
 
 <script setup>
@@ -83,6 +84,7 @@ const addUser = () => {
     username: userdata.value.username,
     addr: userdata.value.addr,
     image: userdata.value.image,
+    location: userdata.value.location,
   };
   store.commit("addUser", uData);
   clearform();
@@ -98,7 +100,8 @@ const handleImage = (e) => {
 
 const handleLocation = (location) => {
   console.log("handleLocation");
-  console.log(location);
+  userdata.value.location = location;
+  console.log(userdata.value.location);
 };
 </script>
 
