@@ -1,14 +1,17 @@
 <template>
   <div class="position-absolute menuWrap rounded bg-light p-3">
     <!-- 검색창 -->
-    <form class="d-flex" role="search">
+    <form class="d-flex mb-3" role="search">
       <input
         class="form-control me-2"
         type="search"
         placeholder="Search"
         aria-label="Search"
       />
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+      <div class="sIcon border rounded">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
     </form>
 
     <!-- user 리스트 -->
@@ -57,5 +60,14 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.sIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 </style>
