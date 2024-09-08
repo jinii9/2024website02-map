@@ -1,5 +1,7 @@
 <template>
-  <div class="position-absolute menuWrap rounded bg-light p-3">
+  <div
+    class="wow animate__animated animate__backInLeft position-absolute menuWrap rounded bg-light p-3"
+  >
     <!-- 검색창 -->
     <form class="d-flex mb-3" role="search">
       <div class="input-group">
@@ -43,12 +45,16 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import store from "../../store/store";
 import SignToggleView from "./SignToggleView.vue";
 
 const inputText = ref("");
 const isModal = false;
+
+onMounted(() => {
+  new WOW().init();
+});
 
 // 1. computed로 검색을 실시간으로 필터하는 경우 ✅
 // 2. 검색 버튼을 누르면 필터되는 경우
