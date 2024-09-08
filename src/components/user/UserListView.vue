@@ -7,8 +7,8 @@
     <div class="avata">
       <img :src="item.image" alt="" />
     </div>
-    <div>
-      <h5 class="mb-0">{{ item.userid }}</h5>
+    <div class="d-flex flex-column justify-content-center gap2">
+      <h5 class="mb-0 text-body-tertiary">{{ item.userid }}</h5>
       <p class="mb-0">{{ item.username }}</p>
     </div>
   </div>
@@ -22,5 +22,9 @@
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
