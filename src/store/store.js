@@ -48,5 +48,10 @@ export default createStore({
     setFilteredUser(state, payload) {
       state.filteredUsers = payload;
     },
+    deleteUser(state, payload) {
+      // userId
+      state.userData = state.userData.filter((user) => user.userid !== payload);
+      console.log(state.userData);
+    },
   },
 });
