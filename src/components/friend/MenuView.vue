@@ -1,17 +1,27 @@
 <template>
-  <div class="position-absolute menuWrap p-4 rounded bg-light">
-    <div class="row gap-2">
+  <div class="position-absolute menuWrap rounded bg-light p-3">
+    <!-- 검색창 -->
+    <form class="d-flex" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
+    <!-- user 리스트 -->
+    <div class="d-flex flex-column gap-2">
       <div
         v-for="(item, i) in $store.state.userData"
         :key="i"
-        class="col-md-12 d-flex gap-5 border rounded p-3"
+        class="d-flex gap-4 border rounded p-2 bg-white"
       >
         <div class="avata">
           <img :src="item.image" alt="" />
         </div>
-        <div
-          class="d-flex flex-column algin-items-center justify-content-center gap-2"
-        >
+        <div class="d-flex flex-column justify-content-center gap-2">
           <p class="text-body-tertiary">{{ item.userid }}</p>
           <p>{{ item.username }}</p>
         </div>
