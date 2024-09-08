@@ -1,6 +1,9 @@
 <template>
   <div>집 주소 {{ location.latitude }} / {{ location.longitude }}</div>
-  <div id="map" style="width: 500px; height: 400px"></div>
+  <div
+    id="map"
+    style="position: relative; width: 100%; height: 300px; z-index: 10009"
+  ></div>
 </template>
 
 <script setup>
@@ -27,10 +30,14 @@ onMounted(() => {
 
       //   initMap();
       if (window.kakao && window.kakao.maps) {
+        console.log("Kakao maps already loaded");
         initMap();
       } else {
         const script = document.createElement("script");
-        script.onload = () => kakao.maps.load(initMap);
+        script.onload = () => {
+          console.log("Kakao maps script loaded");
+          kakao.maps.load(initMap);
+        };
         script.src =
           "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=46a397710eafda98fface8d44f6f4e14";
 
@@ -44,6 +51,7 @@ onMounted(() => {
 });
 
 const initMap = () => {
+  console.log("initMap");
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(location.latitude, location.longitude),
@@ -85,4 +93,9 @@ const initMap = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#map {
+  position: relative;
+  z-index: 10009;
+}
+</style>

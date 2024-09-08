@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md bg-body-tertiary">
+  <nav class="navbar navbar-expand-md bg-body-tertiary" style="z-index: 1000">
     <div class="container">
       <router-link class="navbar-brand" to="/">logo</router-link>
       <button

@@ -8,4 +8,3 @@ import NavbarView from "./components/NavbarView.vue";
 </script>
 
 <style lang="scss" scoped></style>
-zz

@@ -15,6 +15,12 @@
       </div>
     </form>
 
+    <!-- user 추가 -->
+    <div class="w-100 d-flex justify-content-end pb-2">
+      <button type="button" class="btn btn-dark" @click="isModal = true">
+        + 친구 추가
+      </button>
+    </div>
     <!-- user 리스트 -->
     <div class="d-flex flex-column gap-2">
       <div
@@ -32,20 +38,22 @@
       </div>
     </div>
   </div>
+  <!-- 모달 -->
+  <!-- <SignToggleView /> -->
 </template>
 
 <script setup>
 import { computed, ref } from "vue";
 import store from "../../store/store";
+import SignToggleView from "./SignToggleView.vue";
 
 const inputText = ref("");
-const emits = defineEmits();
+const isModal = false;
 
 // 1. computed로 검색을 실시간으로 필터하는 경우 ✅
 // 2. 검색 버튼을 누르면 필터되는 경우
 const filteredUserData = computed(() => {
   if (inputText.value === "") {
-    console.log("확인");
     return store.state.userData;
   }
   return store.state.userData.filter((user) =>
