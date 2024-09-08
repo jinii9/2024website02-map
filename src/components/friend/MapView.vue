@@ -1,5 +1,16 @@
 <template>
-  <!-- <div>{{ location.latitude }} / {{ location.longitude }}</div> -->
+  <!-- 로딩 상태일 때 스피너 표시 -->
+  <div
+    v-if="isLoading"
+    class="d-flex justify-content-center align-items-center"
+    style="width: 100%; height: 100%"
+  >
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- 맵이 로딩된 후에만 표시됨 -->
   <div id="map" class="position-relative" style="width: 100%; height: 100%">
     <MenuView />
   </div>
@@ -12,6 +23,7 @@ import store from "../../store/store";
 import MenuView from "./MenuView.vue";
 
 const location = useMyLocation();
+const isLoading = ref(true);
 
 /** 지도 생성 함수 **/
 const createMap = () => {
@@ -130,6 +142,8 @@ const createMap = () => {
       card.style.visibility = "hidden";
     });
   });
+
+  isLoading.value = false;
 };
 // 지도 생성
 onMounted(() => {
@@ -142,6 +156,7 @@ watch(
   (newLocation) => {
     // 위치 정보 업데이트 시, 지도 생성
     if (newLocation.latitude !== 0 && newLocation.longitude !== 0) {
+      isLoading.value = true;
       createMap();
     }
   },

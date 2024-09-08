@@ -18,11 +18,11 @@
     </form>
 
     <!-- user 추가 -->
-    <div class="w-100 d-flex justify-content-end pb-2">
+    <!-- <div class="w-100 d-flex justify-content-end pb-2">
       <button type="button" class="btn btn-dark" @click="isModal = true">
         + 친구 추가
       </button>
-    </div>
+    </div> -->
     <!-- user 리스트 -->
     <div class="d-flex flex-column gap-2">
       <div
