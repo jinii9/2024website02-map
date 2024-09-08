@@ -6,19 +6,19 @@ import FriendView from "../views/FriendView.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-      path: "/",
-      name: "home",
-      component: HomeView,
-    },
+    // {
+    //   path: "/",
+    //   name: "home",
+    //   component: HomeView,
+    // },
     {
       path: "/user",
       name: "user",
       component: UserView,
     },
     {
-      path: "/friend",
-      name: "friend",
+      path: "/",
+      name: "map",
       component: FriendView,
     },
   ],

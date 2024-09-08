@@ -46,7 +46,9 @@
 
     <!-- map 위치 가져오기 -->
     <UserSignMapView @handleLocation="handleLocation" />
-    <div class="btn btn-primary" @click="addUser">회원가입</div>
+    <div class="mt-3 d-flex justify-content-end">
+      <div class="btn btn-primary" @click="addUser">회원가입</div>
+    </div>
   </div>
 
   <!-- {{ userdata }} -->
