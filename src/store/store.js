@@ -39,10 +39,14 @@ export default createStore({
         image: "/public/img-avatars/princess3.jpg",
       },
     ],
+    filterdUsers: [],
   },
   mutations: {
     addUser(state, payload) {
       state.userData.push(payload);
+    },
+    setFilteredUser(state, payload) {
+      state.filteredUsers = payload;
     },
   },
 });

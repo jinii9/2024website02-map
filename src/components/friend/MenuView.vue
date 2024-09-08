@@ -2,22 +2,23 @@
   <div class="position-absolute menuWrap rounded bg-light p-3">
     <!-- 검색창 -->
     <form class="d-flex mb-3" role="search">
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
-      <div class="sIcon border rounded">
-        <i class="fa-solid fa-magnifying-glass"></i>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <input
+          class="form-control"
+          type="search"
+          placeholder="친구의 이름을 입력하세요"
+          @input="inputText = $event.target.value"
+        />
       </div>
     </form>
 
     <!-- user 리스트 -->
     <div class="d-flex flex-column gap-2">
       <div
-        v-for="(item, i) in $store.state.userData"
+        v-for="(item, i) in filteredUserData"
         :key="i"
         class="d-flex gap-4 border rounded p-2 bg-white"
       >
@@ -33,7 +34,25 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed, ref } from "vue";
+import store from "../../store/store";
+
+const inputText = ref("");
+const emits = defineEmits();
+
+// 1. computed로 검색을 실시간으로 필터하는 경우 ✅
+// 2. 검색 버튼을 누르면 필터되는 경우
+const filteredUserData = computed(() => {
+  if (inputText.value === "") {
+    console.log("확인");
+    return store.state.userData;
+  }
+  return store.state.userData.filter((user) =>
+    user.username.includes(inputText.value)
+  );
+});
+</script>
 
 <style lang="scss" scoped>
 .menuWrap {
