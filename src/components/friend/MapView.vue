@@ -33,6 +33,7 @@ const updateStarbucks = (value) => {
 };
 /** 지도 생성 함수 **/
 const createMap = () => {
+  console.log("createMap 함수 호출됨", isStarbucks);
   const mapContainer = document.getElementById("map"); // 지도를 표시할 div
   const mapOption = {
     center: new kakao.maps.LatLng(location.latitude, location.longitude), // 지도의 중심좌표
@@ -53,6 +54,48 @@ const createMap = () => {
     userId: user.userid,
     userName: user.username,
   }));
+
+  /** 스타벅스 */
+  // 스타벅스 position
+
+  if (isStarbucks.value) {
+    console.log("스타벅스 마커를 표시합니다.");
+    console.log("starbucks", isStarbucks);
+    var starbucksPositions = store.state.starbucksData.map((item) => ({
+      name: item.name,
+      addr: item.addr,
+      // location: {
+      //   latitude: item.location.latitude,
+      //   longitude: item.location.longitude,
+      // },
+      latlng: new kakao.maps.LatLng(
+        item.location.latitude,
+        item.location.longitude
+      ),
+    }));
+    // console.log(starbucksPositions);
+    // 마커 이미지의 이미지 주소입니다
+    var imageSrc =
+      "	https://www.starbucks.co.kr/common/img/store/pin/pin_general.png";
+
+    for (var i = 0; i < positions.length; i++) {
+      // console.log("확인하겠슴니다", positions[i]);
+      // 마커 이미지의 이미지 크기 입니다
+      var imageSize = new kakao.maps.Size(24, 35);
+
+      // 마커 이미지를 생성합니다
+      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image: markerImage, // 마커 이미지
+      });
+    }
+  }
+  ////////////////////////
 
   positions.forEach((position) => {
     /** 마커&토글 스타일링 */
@@ -114,6 +157,9 @@ const createMap = () => {
     cardBody.appendChild(cardSubtitle);
     cardBody.appendChild(cardText);
 
+    //** 스타벅스 마커 생성 */
+    // var map = new kakao.maps.Map();
+    // var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
     /** 마커 생성 */
     var customOverlay = new kakao.maps.CustomOverlay({
       map: map,
@@ -167,6 +213,16 @@ watch(
     }
   },
   { deep: true } // 객체의 속성 변경을 관찰
+);
+watch(
+  () => isStarbucks.value,
+  (newValue) => {
+    console.log("isStarbucks 값 변경됨", newValue);
+    if (location.latitude !== 0 && location.longitude !== 0) {
+      isLoading.value = true;
+      createMap();
+    }
+  }
 );
 </script>
 
