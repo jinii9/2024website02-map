@@ -12,8 +12,10 @@
 
   <!-- 맵이 로딩된 후에만 표시됨 -->
   <div id="map" class="position-relative" style="width: 100%; height: 100%">
-    <MenuView />
+    <MenuView v-model:modelValue="isStarbucks" />
   </div>
+  ddd
+  {{ isStarbucks }}
 </template>
 
 <script setup>
@@ -24,7 +26,11 @@ import MenuView from "./MenuView.vue";
 
 const location = useMyLocation();
 const isLoading = ref(true);
+const isStarbucks = ref(false);
 
+const updateStarbucks = (value) => {
+  console.log(value);
+};
 /** 지도 생성 함수 **/
 const createMap = () => {
   const mapContainer = document.getElementById("map"); // 지도를 표시할 div

@@ -23,6 +23,18 @@
         + 친구 추가
       </button>
     </div> -->
+
+    <!-- 스타벅스 버튼 -->
+    <div class="w-100 d-flex justify-content-end pb-2">
+      <button
+        type="button"
+        class="btn btn-dark"
+        @click="isStarbucks = !isStarbucks"
+      >
+        스타벅스
+      </button>
+    </div>
+
     <!-- user 리스트 -->
     <div class="d-flex flex-column gap-2">
       <div
@@ -45,15 +57,27 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import store from "../../store/store";
 import SignToggleView from "./SignToggleView.vue";
 
 const inputText = ref("");
 const isModal = false;
 
+const props = defineProps({
+  modelValue: Boolean,
+});
+const emit = defineEmits(["update:modelValue"]); // 부모에게 값을 전달하는 이벤트
+// 로컬 상태로 초기화
+const isStarbucks = ref(props.modelValue);
+
 onMounted(() => {
   new WOW().init();
+});
+
+// 상태가 변경될 때마다 부모에게 알림
+watch(isStarbucks, (newValue) => {
+  emit("update:modelValue", newValue);
 });
 
 // 1. computed로 검색을 실시간으로 필터하는 경우 ✅

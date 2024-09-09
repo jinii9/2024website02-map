@@ -12,7 +12,8 @@ export default createStore({
           latitude: 37.48663916609662,
           longitude: 126.88931630598522,
         },
-        image: "/img-avatars/princess1.jpg",
+        image: "/public/img-avatars/princess1.jpg",
+        // image: "/img-avatars/princess1.jpg",
       },
       {
         userid: "findMyShoes22",
@@ -24,8 +25,8 @@ export default createStore({
           latitude: 37.482492,
           longitude: 126.8800348,
         },
-        // image: "/public/img-avatars/princess2.webp",
-        image: "/img-avatars/princess2.webp",
+        image: "/public/img-avatars/princess2.webp",
+        // image: "/img-avatars/p crincess2.webp",
       },
       {
         userid: "thumb00",
@@ -37,7 +38,8 @@ export default createStore({
           latitude: 37.48341028351542,
           longitude: 126.89561876529997,
         },
-        image: "/img-avatars/princess3.jpg",
+        image: "/public/img-avatars/princess3.jpg",
+        // image: "/img-avatars/princess3.jpg",
       },
       {
         userid: "lapunzel09",
@@ -49,10 +51,29 @@ export default createStore({
           latitude: 37.484555636211766,
           longitude: 126.87793360566988,
         },
-        image: "/img-avatars/princess4.jpg",
+        image: "/public/img-avatars/princess4.jpg",
+        // image: "/img-avatars/princess4.jpg",
       },
     ],
     filterdUsers: [],
+    starbucks: [
+      {
+        name: "가산에스케이",
+        addr: "서울특별시 금천구 가산동 371-41, SK V1센터 1층",
+        location: {
+          latitude: 37.48082408602027,
+          longitude: 126.88100079322535,
+        },
+      },
+      {
+        name: "가산디지털",
+        addr: "서울특별시 금천구 가산동 371-28, 우림라이온스밸리 B동 1층",
+        location: {
+          latitude: 37.480050688166365,
+          longitude: 126.88246896653567,
+        },
+      },
+    ],
   },
   mutations: {
     addUser(state, payload) {
