@@ -1,13 +1,23 @@
 <template>
   <div>집 주소 {{ location.latitude }} / {{ location.longitude }}</div>
   <div
+    v-if="isLoading"
+    class="d-flex justify-content-center align-items-center"
+    style="width: 100%; height: 100%"
+  >
+    <div class="spinner-border" role="status" style="width: 100%; height: 100%">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div
     id="map"
     style="position: relative; width: 100%; height: 300px; z-index: 10009"
   ></div>
 </template>
 
 <script setup>
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 
 // 부모한테 전달할 location 값을 reactive로 변경
 const location = reactive({
@@ -15,6 +25,7 @@ const location = reactive({
   longitude: 0,
 });
 const emitLocation = defineEmits(["handleLocation"]);
+const isLoading = ref(true);
 
 onMounted(() => {
   if (!("geolocation" in navigator)) {
@@ -57,7 +68,6 @@ const initMap = () => {
     center: new kakao.maps.LatLng(location.latitude, location.longitude),
     level: 3,
   };
-
   const map = new kakao.maps.Map(container, options);
 
   const markerPosition = new kakao.maps.LatLng(
@@ -75,6 +85,7 @@ const initMap = () => {
 
   // 마커가 지도 위에 표시되도록 설정합니다
   marker.setMap(map);
+  isLoading.value = false;
 
   // 지도에 클릭 이벤트를 등록합니다
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {

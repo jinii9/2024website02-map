@@ -73,6 +73,22 @@ export default createStore({
           longitude: 126.88246896653567,
         },
       },
+      {
+        name: "가산디지털",
+        addr: "서울특별시 금천구 가산동 371-28, 우림라이온스밸리 B동 1층",
+        location: {
+          latitude: 37.480050688166365,
+          longitude: 126.88246896653567,
+        },
+      },
+      {
+        name: "가산디지털",
+        addr: "서울특별시 금천구 가산동 371-28, 우림라이온스밸리 B동 1층",
+        location: {
+          latitude: 37.47941432260294,
+          longitude: 126.92537002954114,
+        },
+      },
     ],
   },
   mutations: {
