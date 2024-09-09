@@ -109,7 +109,7 @@ const createMap = () => {
 
     // back-img img 요소 생성
     const backImg = document.createElement("img");
-    backImg.src = "/public/marker.png";
+    backImg.src = "/marker.png";
     backImg.alt = "";
     backImg.className = "back-img";
 
