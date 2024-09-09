@@ -3,9 +3,9 @@
   <div
     v-if="isLoading"
     class="d-flex justify-content-center align-items-center"
-    style="width: 100%; height: 100%"
+    style="width: 100%; height: 300px"
   >
-    <div class="spinner-border" role="status" style="width: 100%; height: 100%">
+    <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
