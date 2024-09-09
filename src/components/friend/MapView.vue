@@ -28,14 +28,11 @@ const location = useMyLocation();
 const isLoading = ref(true);
 const isStarbucks = ref(false);
 
-const updateStarbucks = (value) => {
-  console.log(value);
-};
 /** 지도 생성 함수 **/
 const createMap = () => {
   console.log("createMap 함수 호출됨", isStarbucks);
-  const mapContainer = document.getElementById("map"); // 지도를 표시할 div
-  const mapOption = {
+  var mapContainer = document.getElementById("map"); // 지도를 표시할 div
+  var mapOption = {
     center: new kakao.maps.LatLng(location.latitude, location.longitude), // 지도의 중심좌표
     level: 6, // 지도의 확대 레벨
   };
@@ -43,7 +40,7 @@ const createMap = () => {
   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
   // 마커를 표시할 위치와 title 객체 배열입니다
-  const positions = store.state.userData.map((user) => ({
+  var positions = store.state.userData.map((user) => ({
     title: user.username,
     latlng: new kakao.maps.LatLng(
       user.location.latitude,
@@ -55,31 +52,27 @@ const createMap = () => {
     userName: user.username,
   }));
 
+  var starbucksPositions = store.state.starbucksData.map((item) => ({
+    name: item.name,
+    addr: item.addr,
+    latlng: new kakao.maps.LatLng(
+      item.location.latitude,
+      item.location.longitude
+    ),
+  }));
+
+  console.log("starbucksPositions", starbucksPositions);
   /** 스타벅스 */
   // 스타벅스 position
-
   if (isStarbucks.value) {
     console.log("스타벅스 마커를 표시합니다.");
     console.log("starbucks", isStarbucks);
-    var starbucksPositions = store.state.starbucksData.map((item) => ({
-      name: item.name,
-      addr: item.addr,
-      // location: {
-      //   latitude: item.location.latitude,
-      //   longitude: item.location.longitude,
-      // },
-      latlng: new kakao.maps.LatLng(
-        item.location.latitude,
-        item.location.longitude
-      ),
-    }));
     // console.log(starbucksPositions);
     // 마커 이미지의 이미지 주소입니다
     var imageSrc =
       "	https://www.starbucks.co.kr/common/img/store/pin/pin_general.png";
 
-    for (var i = 0; i < positions.length; i++) {
-      // console.log("확인하겠슴니다", positions[i]);
+    for (var i = 0; i < starbucksPositions.length; i++) {
       // 마커 이미지의 이미지 크기 입니다
       var imageSize = new kakao.maps.Size(24, 35);
 
@@ -89,8 +82,8 @@ const createMap = () => {
       // 마커를 생성합니다
       var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
-        position: positions[i].latlng, // 마커를 표시할 위치
-        title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        position: starbucksPositions[i].latlng, // 마커를 표시할 위치
+        title: starbucksPositions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image: markerImage, // 마커 이미지
       });
     }
@@ -209,6 +202,7 @@ watch(
     // 위치 정보 업데이트 시, 지도 생성
     if (newLocation.latitude !== 0 && newLocation.longitude !== 0) {
       isLoading.value = true;
+      console.log("watch: location 변화 감지");
       createMap();
     }
   },

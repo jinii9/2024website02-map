@@ -3,7 +3,7 @@
     class="wow animate__animated animate__backInLeft position-absolute menuWrap rounded bg-light p-3"
   >
     <!-- 검색창 -->
-    <form class="d-flex mb-3" role="search">
+    <form class="d-flex mb-3" role="search" @submit.prevent>
       <div class="input-group">
         <span class="input-group-text">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -28,7 +28,8 @@
     <div class="w-100 d-flex justify-content-end pb-2">
       <button
         type="button"
-        class="btn btn-dark"
+        class="btn"
+        style="background-color: #036635; color: white"
         @click="isStarbucks = !isStarbucks"
       >
         스타벅스
